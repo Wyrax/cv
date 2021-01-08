@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Moon phases</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="js/jQueryRotate.js"></script>
+	<script src="js/howler.min.js"></script>
+	
+<style>
+	/*CSS Reset*/
+p, div, img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	line-height: 1;
+	box-sizing: content-box;
+}
+	/*mobile browsers overflow fix*/
+html, body {
+  overflow-x:hidden 
+}
+h1 {
+	display: block;
+	text-align: center;
+	margin-bottom: 50px;
+}
+img {
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+div.wrapcenter {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	/*border: 1px solid red;*/
+}
+div.maindiv {
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	overflow: hidden;
+	width: 600px;
+	height: 600px;
+	/*font-weight: bold;*/
+	font-size: 1em;
+	font-family: Ubuntu, sans-serif;
+	/*border: 1px solid black;*/
+}
+.bglayer {
+	position: absolute;
+	width: 600px;
+	height: 600px;
+	top: 0px;
+	left: -240px;
+	clip: rect(0px, 840px, 600px, 240px);
+}
+.bglayerimg {
+	margin-top: -100px; /*was -300*/
+	max-width: none !important;
+	/*visibility: hidden;*/
+}
+.citylayer {
+	position: absolute;
+	top: 0px;
+}
+.moonlayer {
+	position: absolute;
+	top: 0px;
+}
+.cloudslayer {
+	position: absolute;
+	width: 600px;
+	height: 300px;
+	top: 0px;
+	background-image: url('img/clouds2.svg');
+	background-position: -800px 0px;
+	background-repeat: no-repeat;
+	-webkit-animation: cloudanimation 60s linear infinite;
+	-moz-animation: cloudanimation 60s linear infinite;
+	-o-animation: cloudanimation 60s linear infinite;
+	animation: cloudanimation 60s linear infinite;
+}
+.doodadslayer {
+	position: absolute;
+	top: 0px;
+}
+.santaflip {
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+}
+.doodadsoverlayer {
+	position: absolute;
+	top: 0px;
+}
+.animationlayer {
+	position: absolute;
+	top: 0px;
+}
+.weatherlayer {
+	position: absolute;
+	top: 0px;
+	mix-blend-mode: screen;
+}
+.textlayer {
+	position: absolute;
+	width: 400px;
+	height: 200px;
+	top: 300px;
+	padding: 50px 100px 50px 100px;
+	line-height: 1.5;
+	background-color: white;
+	/*border: 1px solid black; */
+	/*visibility: hidden;*/
+}
+.magneto {
+	position: absolute;
+	display: flex;
+	width: 400px;
+	/*border: 1px solid black;*/
+}
+.magneto * {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.previmg {
+	position: absolute;
+	top: 420px;
+	left: 30px;
+	cursor: pointer;
+}
+.nextimg {
+	position: absolute;
+	top: 420px;
+	left: 540px;
+	cursor: pointer;
+}
+.info {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	color: white;
+	font-size: .8em;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.infotrigger {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 280px;
+}
+
+@keyframes cloudanimation
+{
+from { background-position: -800px 0; }
+	to { background-position: 800px 0; }
+}
+@media all and (max-width: 737px) {
+div.maindiv {
+	overflow: hidden;
+	width: 300px;
+	height: 300px;
+	font-size: .75em;
+	font-family: Ubuntu, sans-serif;
+	/*border: 1px solid violet;*/
+}
+.maindiv img {
+	width: 100%;
+}
+.bglayer {
+	width: 400px;
+	height: 150px;
+	top: 0px;
+	left: -50px;
+	clip: rect(0px, 350px, 150px, 50px); /*(y,x),(y,x) coords*/  
+}
+.bglayerimg {
+	margin-top: -75px; /*was -300*/
+	/*visibility: hidden;*/
+}
+/*.citylayer {
+	position: absolute;
+	top: 0px;
+}*/
+/*.moonlayer {
+	position: absolute;
+	top: 0px;
+}*/
+.cloudslayer {
+	position: absolute;
+	width: 300px;
+	height: 150px;
+	top: 0px;
+	background-image: url('img/clouds2.svg');
+	background-position: -800px 0px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	/*-webkit-animation: cloudanimation 60s linear infinite;
+	-moz-animation: cloudanimation 60s linear infinite;
+	-o-animation: cloudanimation 60s linear infinite;
+	animation: cloudanimation 60s linear infinite;*/
+}
+.textlayer {
+	width: 260px;
+	height: 150px;
+	top: 150px;
+	padding: 10px 20px 10px 20px;
+	line-height: 1.2;
+	/*border: 1px solid green;*/
+	/*visibility: hidden;*/
+}
+.magneto {
+	width: 260px;
+	/*border: 1px solid black;*/
+}
+.magneto img {
+	width: 40px;
+}
+.previmg {
+	width: 10px;
+	top: 200px;
+	left: 0px;
+	/*border: 1px solid red;*/
+}
+.nextimg {
+	width: 10px;
+	top: 200px;
+	left: 290px;
+	/*border: 1px solid red;*/
+}
+.infotrigger {
+	top: 130px;
+}
+}
+
+	</style>
+</head>
+<body>
+<noscript>Sorry! But JavaScript is obviously disabled, forbidden and prohibited in your browser ;)</noscript>
+
+<h1>Moon phases — New Year version</h1>
+
+<div class="wrapcenter">
+<div class="maindiv">
+
+<div class="bglayer"><img class="bglayerimg" src="img/bg1080.jpg"></div>
+<div class="moonlayer"><img id="moon0" class="moonimg" src="img/moon0.png"></div>
+<div class="moonlayer"><img id="moon1" class="moonimg" src="img/moon1.png"></div>
+<div class="moonlayer"><img id="moon2" class="moonimg" src="img/moon2.png"></div>
+<div class="moonlayer"><img id="moon3" class="moonimg" src="img/moon3.png"></div>
+<div class="moonlayer"><img id="moon4" class="moonimg" src="img/moon4.png"></div>
+<div class="moonlayer"><img id="moon5" class="moonimg" src="img/moon5.png"></div>
+<div class="doodadslayer"></div>
+<div class="cloudslayer"></div>
+<div class="doodadsoverlayer"></div>
+<div class="animationlayer"><img src="img/w1.gif"></div>
+<div class="animationlayer"><img src="img/w2.gif"></div>
+<div class="animationlayer"><img src="img/w3.gif"></div>
+<div class="animationlayer"><img src="img/w4.gif"></div>
+<div class="animationlayer"><img src="img/w5.gif"></div>
+<div class="animationlayer"><img src="img/w6.gif"></div>
+<div class="animationlayer"><img src="img/w7.gif"></div>
+<div class="animationlayer"><img src="img/w8.gif"></div>
+<div class="citylayer"><img src="img/landscapeXmas.png"></div>
+<div class="animationlayer"><img src="img/xmasAnimatedLayer.gif"></div>
+<div class="weatherlayer"><img src="img/snowfall.gif"></div>
+<div class="textlayer">
+</div>
+<div class="previmg"><img src="img/prev.png"></div>
+<div class="nextimg"><img src="img/next.png"></div>
+<div class="info"></div>
+<div class="infotrigger"></div>
+</div>
+</div>
+
+<script>
+jQuery(document).ready(function(){
+
+var ufo_sound = new Howl({
+		src: ['snd/ufo3.ogg', 'snd/ufo3.mp3']
+	});
+var witch_sound = new Howl({
+		src: ['snd/witch3.ogg', 'snd/witch3.mp3']
+	});
+var moonbike_sound = new Howl({
+		src: ['snd/moonbike3.ogg', 'snd/moonbike3.mp3']
+	});
+var cricket_sound = new Howl ({
+		src: ['snd/cricket3.ogg', 'snd/cricket3.mp3']
+	});
+// var cops_sound = new Howl ({
+// 		src: ['snd/cops.ogg', 'snd/cops.mp3']
+// 	});
+/*var Xmas sounds*/
+var blizzard_sound = new Howl ({
+		src: ['snd/blizzard.ogg', 'snd/blizzard.mp3']
+});
+var santa_sound = new Howl ({
+		src: ['snd/santa_arrival.ogg', 'snd/santa_arrival.mp3']
+});
+var xmascarol_sound = new Howl ({
+		src: ['snd/mykolaj.ogg', 'snd/mykolaj.mp3']
+});
+
+var xmascarol = false;
+	console.log('Carol choir is ready to sing. Khm-khm... / '+xmascarol);
+var santa_flip = false;
+console.log('santa_flip = '+santa_flip);
+
+var iTopTrigger = 0;
+var iBotTrigger = 0;
+var iVisTrigger = 0;
+var afterLoadEventPreventor = 1;
+var dayNumber, dayHeader, dayText, dayMoon, dayMagnetoIcon, dayMagneto;
+var ufoOffline = true;
+var ufoDelayer = 0;
+
+/*var insertTextHere = ['text,text,text'];
+console.log('textArray: '+insertTextHere[4]);*/
+/*var insertMoonPhasesHere = ['num,num,num'];*/
+
+var dayData = new Date; //Current date
+console.log('Today is: '+dayData);
+var fromDay = new Date;
+fromDay.setFullYear(2017, 11, 14); /*(YEAR, MM-1, DD)*/
+fromDay.setHours(0, 0, 0, 0);
+var toDay = new Date(fromDay);
+toDay.setDate(fromDay.getDate() + 7);
+
+console.log('fromDay = '+fromDay);
+console.log('toDay = '+toDay);
+console.log(dayData >= fromDay && dayData < toDay);
+
+	if (dayData >= fromDay && dayData < toDay){
+	dayNumber = dayData.getDay();
+	console.log('Current day is within pre-inputed range (is TRUE), so day-number set to '+dayNumber);
+	} else {
+	dayNumber = 4;
+	console.log('Current day is out of pre-inputed range (is FALSE) so day-number set to Thursday');
+
+	};
+
+var angleValue = 0;
+
+switchDo();
+
+var angle = 0;
+	setInterval(function(){
+	angle+=.01;
+	jQuery(".bglayerimg").rotate(angle);
+	},50);
+
+function iTrigger() {
+	switch (iVisTrigger) {
+	case 0:
+		if (iTopTrigger == 1 && iBotTrigger == 1) {
+jQuery('.info').hide().css("width", "auto").html('Created by Anton "Wyrax" Som').slideDown();
+		iVisTrigger = 1;
+		};
+		break;
+	case 1:
+			jQuery('.info').css("width", "20px").html('');
+			iVisTrigger = 0;
+		break;
+		};
+};
+
+jQuery('.previmg').on("click", function(){
+	jQuery('.previmg').css("pointer-events", "none");
+	angleValue +=180;
+	console.log('Angle of next image that will be taken by <PREVIOUS button> = '+angleValue);
+	jQuery('#moon'+dayMoon).rotate({
+					animateTo: angleValue,
+					duration: 2000
+					});
+	angleValue = 0;
+	jQuery('.textlayer').html(' ');
+
+	if (dayNumber>0) {
+		dayNumber--;
+	} else { dayNumber=6 };
+
+	setTimeout(function(){
+		/*reset angle of moonseted moon*/
+		jQuery('#moon'+dayMoon).rotate({
+					angle: 0,
+					duration: 0
+				});
+		switchDo();
+		jQuery('.previmg').css("pointer-events", "auto");
+		},500);
+});	
+
+jQuery('.nextimg').on("click", function(){
+	jQuery('.nextimg').css("pointer-events", "none");
+	angleValue +=180;
+	console.log('Angle of next image that will be taken by <NEXT button> = '+angleValue);
+
+	/*moonset*/
+	jQuery('#moon'+dayMoon).rotate({
+					animateTo: angleValue,
+					duration: 2000
+					});
+	angleValue = 0;
+	jQuery('.textlayer').html(' ');
+
+	if (dayNumber<6) {
+		dayNumber++;
+	} else { dayNumber=0 };
+
+	setTimeout(function(){
+		/*reset angle of moonseted moon*/
+		jQuery('#moon'+dayMoon).rotate({
+					angle: 0,
+					duration: 0
+				});
+		switchDo();
+		jQuery('.nextimg').css("pointer-events", "auto");
+		},500); 
+});
+
+function switchDo(){
+
+switch (dayNumber) {
+	case 4: dayHeader = 'ЧЕТВЕРГ, 22 декабря, 4-я четверть';
+			dayText = 'Пристальное внимание обратите на сердце. Его не стоит перегружать тяжелыми тренировками и необходимо оберегать от стрессов и нервных срывов.';
+			dayMagneto = 'Магнитных бурь в этот день нет.';
+			break;
+	case 5: dayHeader = 'ПЯТНИЦА, 23 декабря, новолуние';
+			dayText = 'День для усовершенствования оздоровительных программ, которые вы использовали раннее, или для их начала. Особенно полезны водные процедуры.';
+			dayMagneto = 'Магнитная буря с 06:00 до 08:00.';
+			break;
+	case 6: dayHeader = 'СУББОТА, 24 декабря, 1-я четверть';
+			dayText = 'Уязвимы глаза. Если есть возможность, откажитесь от чтения. Полезно созерцание воды, неба или просто линии горизонта. Лучше на рассвете или закате.';
+			dayMagneto = 'Магнитная буря с 17:00 до 19:00.';
+			break;
+	case 0: dayHeader = 'ВОСКРЕСЕНЬЕ, 25 декабря, 2-я четверть';
+			dayText = 'Заболевания могут обостриться. Пристальное внимание следует обратить на поджелудочную железу — не переедайте и откажитесь от жирной пищи.';
+			dayMagneto = 'Магнитных бурь в этот день нет.';
+			break;
+	case 1: dayHeader = 'ПОНЕДЕЛЬНИК, 26 декабря, полнолуние';
+			dayText = 'Сегодняшний день хорош для очистительных процедур, травяных ванн, сеансов ароматерапии. Сегодня отдых должен быть максимально пассивным.';
+			dayMagneto = 'Магнитных бурь в этот день нет.';
+			break;
+	case 2: dayHeader = 'ВТОРНИК, 27 декабря, 3-я четверть';
+			dayText = 'Могут отступить хронические болезни, так как силы организма — на пике. В тренировках и оздоровлении можно сделать паузу — это принесет пользу.';
+			dayMagneto = 'Магнитных бурь в этот день нет.';
+			break;
+	case 3: dayHeader = 'СРЕДА, 28 декабря, 4-я четверть';
+			dayText = 'Пристальное внимание следует уделить состоянию кожи — провести сеансы легкого массажа с применением масел или сандаловой пасты.';
+			dayMagneto = 'Магнитных бурь в этот день нет.';
+			break;
+};
+
+/*Slice check for magneto icon*/
+console.log('Are there any magnetic storms? Slice(-4) = '+dayMagneto.slice(-4));
+if (dayMagneto.slice(-4) == 'нет.') {
+	dayMagnetoIcon = 'no';
+	console.log('Magnetic storm icon set to: -NO STORM-');
+} else {
+	dayMagnetoIcon = 'yes';
+	console.log('Magnetic storm icon set to: +YES STORM+');
+}
+
+/*Slice check for phase of the moon*/
+console.log('Lets slice some symbols from text: '+dayHeader.slice(-7,-5));
+switch (dayHeader.slice(-7,-5)) {
+	case 'ет':
+		switch(dayHeader.slice(-12,-11)) {
+			case '1': dayMoon = 1;
+				break;
+			case '2': dayMoon = 2;
+				break;
+			case '3': dayMoon = 4;
+				break;
+			case '4': dayMoon = 5;
+				break;
+		}
+	console.log('Moon is in: '+dayHeader.slice(-12,-11)+'-я четверть');
+	/*dayMoon = dayHeader.slice(-12,-11);*/
+	console.log('dayMoon = '+dayMoon+' is '+typeof dayMoon);
+		break;
+	case 'но': console.log('Today is full moon');
+	dayMoon = 3;
+	console.log('dayMoon = '+dayMoon+' is '+typeof dayMoon);
+		break;
+	case 'во': console.log('Today is new moon');
+	dayMoon = 0;
+	console.log('dayMoon = '+dayMoon+' is '+typeof dayMoon);
+		break;
+}
+
+/*Hiding left arrow for Thursday and right arrow to Wednesday*/
+if (dayNumber == 3) {
+	jQuery('.nextimg').hide();
+} else {
+	jQuery('.nextimg').show();
+}
+if (dayNumber == 4) {
+	jQuery('.previmg').hide();
+} else {
+	jQuery('.previmg').show();
+}
+console.log ('day-number = '+dayNumber);
+/*console.log ('moon-phase-type = '+dayMoon);*/
+console.log ('Moonset. All moon images angles = '+angleValue);
+jQuery('.textlayer').html('<b>'+dayHeader+'</b><br><br>'+dayText);
+jQuery('.textlayer').append('<br><br><div class="magneto"><img src="img/magnetic_'+dayMagnetoIcon+'.png">'+'<span>'+dayMagneto+'</span></div>');
+
+console.log ('Moonrise. Trying to rotate image with id #moon'+dayMoon);
+
+/*moonrise*/
+angleValue +=180;
+jQuery('#moon'+dayMoon).rotate({
+					animateTo: angleValue,
+					duration: 2000
+				});
+console.log ('Angle of active taken image after moonrise execution = '+angleValue);
+
+/*Xmas carol*/
+if (xmascarol == false && dayNumber == 6) {
+	xmascarol_sound.play();
+	xmascarol = true;
+	console.log('Carol out! La-la-la! / '+xmascarol);
+}
+
+if (afterLoadEventPreventor != 0) {
+	afterLoadEventPreventor--;
+} else {
+/*random doodads*/
+var randoo = Math.floor(Math.random()*10) + 1;
+console.log ('Precheck: is UFO offline = '+ufoOffline+' /'+ufoDelayer+' to reactivation');
+if ((dayMoon == 0 || dayMoon == 1 || dayMoon == 5) && randoo <= 2 && ufoOffline) {
+	console.log ('Wzzzzzz-ck!');
+	jQuery('.doodadslayer').html('<img src="img/doodad_ufo.gif'+'?'+Math.random()+'">');
+	ufoOffline = false;
+	console.log ('ufoOffline = '+ufoOffline);
+	ufoDelayer = 12;
+	console.log ('Postcheck: is UFO offline = '+ufoOffline);
+	witch_sound.stop();
+	moonbike_sound.stop();
+	cricket_sound.stop();
+	ufo_sound.play();
+};
+if (ufoOffline == false && ufoDelayer > 0) {
+	ufoDelayer--;
+	console.log ('ufoDelayer = '+ufoDelayer);
+} else if (ufoDelayer == 0) {
+	ufoOffline = true;
+	console.log ('ufoOffline = '+ufoOffline);
+};
+//if ((dayMoon == 2 || dayMoon == 3 || dayMoon == 4) && randoo >= 9 && ufoOffline) {
+//	console.log ('Curses!');
+//	jQuery('.doodadslayer').html('<img src="img/doodad_witch3.gif'+'?'+Math.random()+'">');
+//	ufo_sound.stop();
+//	moonbike_sound.stop();
+//	cricket_sound.stop();
+//	witch_sound.play();
+//};
+//if (dayMoon == 3 && (randoo == 3 || randoo == 8)) {
+//	console.log ('To the Mooooooon!');
+//	jQuery('.doodadslayer').html('<img src="img/doodad_moonbike2.gif'+'?'+Math.random()+'">');
+	/*ufoOffline = false;
+	ufoDelayer = 12;
+	console.log ('Ufo blocked by E.T.!');*/
+//	ufo_sound.stop();
+//	witch_sound.stop();
+//	cricket_sound.stop();
+//	moonbike_sound.play();
+//};
+//if (dayMoon == 0 && (randoo == 3 || randoo == 8)) {
+//	console.log ('Come, Batman! We need your help!');
+//	jQuery('.doodadsoverlayer').html('<img src="img/doodad_batsignal.gif'+'?'+Math.random()+'">');
+	/*sounds here*/
+//	moonbike_sound.stop();
+//	cops_sound.play();
+//};
+//if (randoo == 5) {
+//	console.log ('Cricket time!');
+	/*ufo_sound.stop();*/
+	/*moonbike_sound.stop();*/
+//	cops_sound.stop();
+	/*witch_sound.stop();*/
+//	cricket_sound.play();
+//};
+if ((dayMoon == 2 || dayMoon == 3 || dayMoon == 4) && randoo >= 9) {
+	console.log ('Santa is here!');
+	jQuery('.doodadslayer').html('<img id="santa" src="img/santa_arrival.gif'+'?'+Math.random()+'">');
+	if (santa_flip) {
+		console.log('santa_flip = '+santa_flip);
+		jQuery('#santa').addClass('santaflip');
+		santa_flip = false;
+	} else {
+		console.log('santa_flip = '+santa_flip);
+		jQuery('#santa').removeClass('santaflip');
+		santa_flip = true;
+	};
+
+	ufo_sound.stop();
+	/*witch_sound.stop();*/
+	/*cricket_sound.stop();*/
+	santa_sound.stop();
+	santa_sound.play();
+};
+if (randoo == 5) {
+	console.log ('Blizzard time!');
+	/*ufo_sound.stop();*/
+	/*moonbike_sound.stop();*/
+	/*cops_sound.stop();*/
+	/*witch_sound.stop();*/
+	blizzard_sound.play();
+};
+
+console.log ('randoo = '+randoo);
+}; /*end of ELSE random doodads*/
+console.log ('afterLoadEventPreventor = '+afterLoadEventPreventor);
+console.log ('---End of switchDo function---\n\n');
+}; /*end of switchDo*/
+
+jQuery('.info').on("click", function(){
+	iTopTrigger = 1;
+	iTrigger();
+});
+jQuery('.infotrigger').on("click", function(){
+	iBotTrigger = 1;
+	iTrigger();
+});
+
+});
+
+</script>
+
+<!-- <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script> -->
+
+</body>
+</html>

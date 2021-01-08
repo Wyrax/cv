@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Find the Differences 6: Wedding</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="js/howler.min.js"></script>
+	<style>
+
+
+/*ВСТАВИТЬ В STYLES*/
+	/*CSS Reset*/
+.wrapcenter * {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	line-height: 1;
+	box-sizing: content-box;
+}
+h1 {
+	display: block;
+	text-align: center;
+	margin-bottom: 50px;
+}
+img {
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+div.wrapcenter {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+div.maindiv {
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	width: 570px;
+	font-weight: bold;
+	font-size: .9em;
+	font-family: Ubuntu, sans-serif;
+}
+.picdiv {
+	position: relative;
+	display: inline-block;
+	width: 510px;
+}
+.menudiv {
+	position: relative;
+	display: inline-block;
+	bottom: 35px;
+	width: 50px;
+}
+.leftpicdiv {
+	position: relative;
+	display: inline-block;
+	height: auto;
+}
+.leftpic {
+	width: 510px;
+}
+.rightpicdiv {
+	position: relative;
+	display: inline-block;
+	height: auto;
+}
+.rightpic {
+	width: 510px;
+}
+.spot {
+	position: absolute;
+	z-index: 99;
+	width: 40px;
+	height: 40px;
+	background-size: 40px 40px;
+	background-repeat: no-repeat;
+	/*border: 1px solid purple;*/
+}
+.found {
+	position: absolute;
+	z-index: 99;
+	width: 40px;
+	height: 40px;
+	background-size: 40px 40px;
+	background-repeat: no-repeat;
+}
+.statblock {
+	display: inline-block;
+	vertical-align: top;
+	width: 60px;
+	height: 50px;
+	text-align: center;
+	font-size: 48px;
+}
+.statblockpic {
+	display: inline-block;
+	vertical-align: top;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	font-size: 1em;
+}
+.statblocktippic {
+	display: inline-block;
+	vertical-align: top;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	font-size: 1em;
+	cursor: pointer;
+}
+.foundcounter {
+	/*letter-spacing: -9px;*/
+}
+.iconpic {
+	width: 50px;
+	height: 50px;
+}
+/*after Photoshop positioning extract 5 from each percent value*/
+.firstspot {
+	left: 5%;
+	top: 23%;
+}
+.secondspot {
+	left: 37%;
+	top: 11%;
+}
+.thirdspot {
+	left: 87%;
+	top: 26%;
+}
+.fourthspot {
+	left: 37%;
+	top: 41%;
+}
+.fifthspot {
+	left: 60%;
+	top: 35%;
+}
+.sixthspot {
+	left: 61%;
+	top: 52%;
+}
+.seventhspot {
+	left: 6%;
+	top: 71%;
+}
+.eighthspot {
+	left: 31%;
+	top: 87%;
+}
+.ninthspot {
+	left: 49%;
+	top: 78%;
+}
+.tenthspot {
+	left: 82%;
+	top: 84%;
+}
+.successdiv {
+	position: absolute;
+	visibility: hidden;
+	display: flex;
+	z-index: 100;
+	top: 45%;
+	left: 145px;
+	width: 220px;
+	height: 50px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: white;
+	border-radius: 6px;
+	background-color: red;
+}
+.tooltip {
+	position: relative;
+	display: inline-block;
+}
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 100px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 110%;
+	left: 50%;
+	margin-left: -50px;
+}
+.tooltip .tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: black transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
+@media screen and (min-width: 1250px) {
+
+div.maindiv {
+	width: 1030px;
+}
+.picdiv {
+	width: 1030px;
+}
+.menudiv {
+	float: right; /*if needed to be at the top */
+	width: auto;
+	bottom: -10px;
+	height: 50px;
+}
+.successdiv {
+	top: 45%;
+	left: 402px;
+}
+
+}
+
+@media all and (max-width: 670px) {
+
+div.maindiv {
+	width: 300px;
+}
+.picdiv {
+	width: 300px;
+}
+.menudiv {
+	float: right; /*if needed to be at the top */
+	width: auto;
+	bottom: -10px;
+}
+.leftpicdiv {
+	width: 300px;
+	height: auto;
+}
+.leftpic {
+	width: 300px;
+}
+.rightpicdiv {
+	width: 300px;
+}
+.rightpic {
+	width: 300px;
+}
+.spot {
+	width: 20px;
+	height: 20px;
+	background-size: 20px 20px;
+}
+.found {
+	width: 20px;
+	height: 20px;
+	background-size: 20px 20px;
+}
+.successdiv {
+	top: 45%;
+	left: 50px;
+}
+
+}
+/*КОНЕЦ ВСТАВКИ В STYLES*/
+
+
+</style>
+</head>
+<body>
+<h1>Find the Differences 6: Wedding</h1>
+
+
+<!--ВСТАВИТЬ В HTML-->
+<noscript>Sorry! But JavaScript is obviously disabled, forbidden and prohibited in your browser ;)</noscript>
+<div class="wrapcenter">
+<div class="maindiv">
+
+<div class="picdiv">
+<div class="leftpicdiv"><img class="leftpic" src="img/up_06.png">
+	<div class="spot firstspot"></div>
+	<div class="spot secondspot"></div>
+	<div class="spot thirdspot"></div>
+	<div class="spot fourthspot"></div>
+	<div class="spot fifthspot"></div>
+	<div class="spot sixthspot"></div>
+	<div class="spot seventhspot"></div>
+	<div class="spot eighthspot"></div>
+	<div class="spot ninthspot"></div>
+	<div class="spot tenthspot"></div>
+</div>
+
+<div class="rightpicdiv"><img class="rightpic" src="img/down_06.png">
+	<div class="spot firstspot"></div>
+	<div class="spot secondspot"></div>
+	<div class="spot thirdspot"></div>
+	<div class="spot fourthspot"></div>
+	<div class="spot fifthspot"></div>
+	<div class="spot sixthspot"></div>
+	<div class="spot seventhspot"></div>
+	<div class="spot eighthspot"></div>
+	<div class="spot ninthspot"></div>
+	<div class="spot tenthspot"></div>
+</div>
+</div>
+
+<div class="menudiv">
+	<div class="statblockpic"><div class="tooltip"><img class="iconpic tooltip" src="img/found_icon.png" alt="Найдено различий"><span class="tooltiptext">Отличий<br>найдено</span>
+</div></div>
+	<div class="statblock foundcounter">0</div>
+	<div class="statblock"></div>
+	<div class="statblockpic statblocktippic"><div class="tooltip"><img class="iconpic" src="img/tip_icon.png" alt="Подсказок осталось"><span class="tooltiptext">Подсказок<br>осталось</span>
+</div></div>
+	<div class="statblock tipcounter">3</div>
+
+</div>
+<div class="successdiv">Поздравляем!<br>Вы нашли все отличия!</div>
+</div>
+</div>
+<br><br>
+<!--КОНЕЦ ВСТАВКИ В HTML-->
+
+
+<p>Developer:</p>
+<button id="win">WIN-button</button>
+<script>
+
+
+/*ВСТАВИТЬ В SCRIPTS*/
+jQuery( document ).ready(function() {
+
+	var foundcount = 0;
+	var tipcount = 3;
+	var foundsound = new Howl({
+		src: ['snd/found.ogg', 'snd/found.mp3']
+	});
+	var successsound = new Howl({
+		src: ['snd/success.ogg', 'snd/success.mp3']
+	});
+	var sparklesound = new Howl({
+		src: ['snd/sparkle1.ogg', 'snd/sparkle1.mp3']
+	});
+
+	jQuery('.statblocktippic').on("click", function() {
+		if (tipcount > 0 && foundcount != 10) {
+		var sparkled = jQuery('.spot').eq(0).attr('class').split(' ')[1];
+		console.log('tip on: '+sparkled);
+		jQuery('.'+sparkled).css('background-image', 'url(img/sparkle.gif' + '?' + Math.random()+')');
+		tipcount--;
+		jQuery('.tipcounter').text(tipcount);
+		sparklesound.play();
+		};
+	});
+
+	jQuery('#win').on("click", function() {
+		$('.spot').css('background-image', 'url(img/spotted_red.gif)').removeClass('spot').addClass('found');
+		foundcount = 10;
+		jQuery('.foundcounter').text(foundcount);
+
+	});
+
+	jQuery('.maindiv').on("click", ".spot", function() {
+		var groupsimilar = jQuery(this).attr('class').split(' ')[1];
+		console.log('found: '+groupsimilar);
+		jQuery('.'+groupsimilar).removeClass('spot');
+
+		/*circle color here*/
+		jQuery('.'+groupsimilar).css('background-image', 'url(img/spotted_red.gif' + '?' + Math.random()+')');
+
+		jQuery('.'+groupsimilar).addClass('found');
+		foundcount++;
+		if (foundcount == 10) {
+			successsound.play();
+			setTimeout(function() {
+			jQuery('.successdiv').css('visibility', 'visible');
+			},3000);
+			jQuery('.foundcounter').css('text-indent', '-.1em');
+		};
+		jQuery('.foundcounter').text(foundcount);
+		foundsound.play();
+	});
+
+
+}); //end of (document).ready
+/*КОНЕЦ ВСТАВКИ В SCRIPTS*/
+
+
+</script>
+</body>
+</html>

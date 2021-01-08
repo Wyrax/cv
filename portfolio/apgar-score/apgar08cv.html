@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>APGAR-score</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="js/howler.min.js"></script>
+
+<style>
+	/*CSS Reset*/
+p, div, img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	line-height: 1;
+}
+img {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-touch-callout: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+div.wrapcenter {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+div.maindiv {
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	width: 600px;
+	height: 300px;
+	font-weight: bold;
+	font-size: .9em;
+	font-family: Ubuntu, sans-serif;
+}
+div.mainleft {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 300px;
+	height: 300px;
+}
+div.mainright {
+	position: absolute;
+	top: 0px;
+	left: 300px;
+	width: 300px;
+	height: 300px;
+}
+div.rangetext {
+	position: relative;
+	width: 300px;
+	height: 60px;
+}
+div.range {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100px;
+	height: 60px;
+	display: flex;
+	align-items: center;
+}
+div.textbox {
+	position: absolute;
+	top: 10px;
+	left: 100px;
+	width: 200px;
+	height: 60px;
+}
+input[type=range] {
+	-webkit-appearance: none;
+	margin: 18px 0;
+	width: 70%;
+}
+input[type=range]:focus {
+	outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 10px;
+	cursor: pointer;
+	transition: all 0.2s;
+	border-radius: 1.3px;
+	border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+	border: 1px solid #000000;
+	height: 36px;
+	width: 16px;
+	border-radius: 3px;
+	background: #ffffff;
+	cursor: pointer;
+	-webkit-appearance: none;
+	margin-top: -14px;
+}
+input[type=range]::-moz-range-track {
+	width: 100%;
+	height: 0px;
+	cursor: pointer;
+	transition: 0.2s;
+}
+input[type=range]:-moz-focusring {
+	outline: 1px solid white;
+	outline-offset: -1px;
+}
+input[type=range]::-moz-range-thumb {
+	border: 1px solid #000000;
+	height: 36px;
+	width: 16px;
+	border-radius: 3px;
+	background: #ffffff;
+	cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  transition: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: green;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type=range]::-ms-fill-upper {
+  background-color: #ed1b24;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type=range]::-ms-thumb {
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+.gray {
+	background-color: gray;
+}
+.green {
+	background-color: green;
+}
+.orange {
+	background-color: orange;
+}
+.red {
+	background-color: #ed1b24;
+}
+@-moz-document url-prefix() { 
+	.gray {
+	height: 6px;
+	}
+	.green {
+	height: 6px;
+	}
+	.orange {
+	height: 6px;
+	}
+	.red {
+	height: 6px;
+	}
+	input[type=range] {
+	border: 1px solid black;
+	}
+}
+output {
+	font-weight: bold;
+	font-size: 1.5em;
+	vertical-align: 50%;
+	font-family: Ubuntu, Arial, sans-serif;
+}
+b {
+	color: #ed1b24;
+}
+.bold {
+	color: #ed1b24;
+	font-weight: bold;
+	text-decoration: none;
+}
+div.maindiv p {
+	font-weight: normal;
+	line-height: 1.3;
+}
+#appearancePicid {
+	position: absolute;
+	left: 75px;
+	top: 35px;
+	width: 150px;
+	height: 150px;
+}
+#pulsePicid {
+	position: absolute;
+	left: 49px;
+	top: 62px;
+	width: 200px;
+	height: 100px;
+}
+#activityPicid {
+	position: absolute;
+	left: 75px;
+	top: 35px;
+	width: 150px;
+	height: 170px;
+}
+#respirationPicid {
+	position: absolute;
+	left: 75px;
+	top: 35px;
+	width: 150px;
+	height: 150px;
+}
+#grimacePicid {
+	position: absolute;
+	left: 75px;
+	top: 35px;
+	width: 150px;
+	height: 150px;
+}
+#bottle {
+	position: absolute;
+	left: 60px;
+	top: 80px;
+	width: 80px;
+	height: 150px;
+}
+#nipple {
+	position: absolute;
+	left: 100px;
+	top: 80px;
+	width: 100px;
+	height: 150px;
+	cursor: pointer;
+}
+#chicken {
+	position: absolute;
+	left: 160px;
+	top: 80px;
+	width: 80px;
+	height: 150px;
+}
+#cloud {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100px;
+	height: 80px;
+	max-height: 80px;
+	overflow: hidden;
+}
+#cloudpic {
+	position: absolute;
+	bottom: 0;
+}
+#apgarscore {
+	position: absolute;
+	left: 22px;
+	top: 18px;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+}
+#apgarscoretext {
+	color: #ed1b24;
+	font-size: 2.5em;
+	font-weight: bold;
+	letter-spacing: -3px;
+}
+.verdictdiv {
+	position: absolute;
+	left: 63px;
+	top: 239px;
+	width: 180px;
+	height: 40px;
+}
+.verdict {
+	color: white;
+	text-align: center;
+}
+@media all and (max-width: 600px) {
+	div.maindiv {
+	width: 300px;
+	height: 600px;
+	}
+	div.mainright {
+	top: 300px;
+	left: 0px;
+	}
+}
+</style>
+
+</head>
+<body>
+<noscript>Sorry! But JavaScript is obviously disabled, forbidden and prohibited in your browser ;)</noscript>
+
+<h1>APGAR-score</h1>
+<p>Random text here<br><br>
+
+<div class="wrapcenter">
+<div class="maindiv">
+<div class="mainleft"><img src="img/bg-score.png">
+	<div id="pulse"><img id="pulsePicid" src="img/pulse2.gif"></div>
+	<div id="activity"><img id="activityPicid" src="img/activity2.png"></div>
+	<div id="appearance"><img id="appearancePicid" src="img/appearance2.png"></div>	
+	<div id="respiration"><img id="respirationPicid" src="img/respiration2.png"></div>
+	<div id="grimace"><img id="grimacePicid" src="img/grimace2.png"></div>
+	<div id="nipple"><img id="nipplegif" src="img/nipple.gif"></div>
+	<div id="bottle"><img src="img/bottle.gif"></div>
+	<div id="chicken"><img src="img/chicken.gif"></div>
+	<div id="cloud"><img id="cloudpic" src="img/cloud.png"></div>
+	<div id="apgarscore"><p id="apgarscoretext">10</div>
+	<div class="verdictdiv">
+	<p class="verdict">МАЛЫШ ТРЕБУЕТ СТАНДАРТНОГО УХОДА
+	</div>
+</div>
+
+<div class="mainright">
+	<div class="rangetext">
+		<div class="range">
+			<input type="range" class="green" name="appearanceInputName" id="appearanceInputId" value="2" min="0" max="2" oninput="appearanceOutputId.value = appearanceInputId.value">&nbsp;
+			<output name="appearanceOutputName" id="appearanceOutputId">2</output>
+		
+		<div class="textbox"><b>Appearance.</b> Цвет кожи
+		<p id="appearancePid">Розовый цвет и тела, и&nbsp;конечностей
+		</div></div>
+	</div>
+	<div class="rangetext">
+		<div class="range">
+			<input type="range" class="green" name="pulseInputName" id="pulseInputId" value="2" min="0" max="2" oninput="pulseOutputId.value = pulseInputId.value">&nbsp;
+			<output name="pulseOutputName" id="pulseOutputId">2</output>
+
+		<div class="textbox"><b>Pulse.</b> Частота сердцебиения
+		<p id="pulsePid">Больше 100 в минуту
+		</div></div>
+	</div>
+	<div class="rangetext">
+		<div class="range">
+			<input type="range" class="green" name="grimaceInputName" id="grimaceInputId" value="2" min="0" max="2" oninput="grimaceOutputId.value = grimaceInputId.value">&nbsp;
+			<output name="grimaceOutputName" id="grimaceOutputId">2</output>
+
+		<div class="textbox"><b>Grimace.</b> Рефлексы
+		<p id="grimacePid">Движения, кашель, чихание, громкий крик
+		</div></div>
+	</div>
+	<div class="rangetext">
+		<div class="range">
+			<input type="range" class="green" name="activityInputName" id="activityInputId" value="2" min="0" max="2" oninput="activityOutputId.value = activityInputId.value">&nbsp;
+			<output name="activityOutputName" id="activityOutputId">2</output>
+
+		<div class="textbox"><b>Activity.</b> Мышечный тонус
+		<p id="activityPid">Активные, четко выраженые движения
+		</div></div>
+	</div>
+	<div class="rangetext">
+		<div class="range">
+			<input type="range" class="green" name="respirationInputName" id="respirationInputId" value="2" min="0" max="2" oninput="respirationOutputId.value = respirationInputId.value">&nbsp;
+			<output name="respirationOutputName" id="respirationOutputId">2</output>
+
+		<div class="textbox"><b>Respiration.</b> Дыхание
+		<p id="respirationPid">Нормальное, громкий крик
+		</div></div>
+	</div>
+	
+</div>
+</div>
+</div>
+
+<script>
+
+	var isIE = /(MSIE|Trident\/|Edge\/)/i.test(navigator.userAgent);
+	console.log('isIE = '+isIE);
+	if (isIE == true) { jQuery('input[type="range"]').removeClass();};
+
+	var textAPGAR = {
+		appearanceArray: ['Бледный или синюшный', 'Розовый цвет тела, но синюшные конечности', 'Розовый цвет и тела, и&nbsp;конечностей'],
+		pulseArray: ['Пульс не прослушивается', 'Меньше 100 в минуту', 'Больше 100 в минуту'],
+		grimaceArray: ['Отсутствуют', 'Слабо выражены: движение, мимолетная гримаса', 'Движения, кашель, чихание, громкий крик'],
+		activityArray: ['Отсутствует, конечности свисают', 'Понижен, конечности немного согнуты', 'Активные, четко выраженые движения'],
+		respirationArray: ['Отсутствует', 'Нерегулярное, слабый крик', 'Нормальное, громкий крик']
+	};
+
+	var picAPGAR = {
+		appearanceArray: ['img/appearance0.png', 'img/appearance1.png', 'img/appearance2.png'],
+		pulseArray: ['img/pulse0.gif', 'img/pulse1.gif', 'img/pulse2.gif'],
+		grimaceArray: ['img/grimace0.png', 'img/grimace1.png', 'img/grimace2.png'],
+		activityArray: ['img/activity0.png', 'img/activity1.png', 'img/activity2.png'],
+		respirationArray: ['img/respiration0.png', 'img/respiration1.png', 'img/respiration2.png']
+	};
+
+	var sound0 = new Howl({
+		src: ['snd/respiration0.ogg', 'snd/respiration0.mp3']
+	});
+	var sound1 = new Howl({
+		src: ['snd/respiration1.ogg', 'snd/respiration1.mp3']
+	});
+	var sound2 = new Howl({
+		src: ['snd/respiration2.ogg', 'snd/respiration2.mp3']
+	});
+
+	jQuery('#nipplegif').attr('src', jQuery('#nipplegif').attr('src') + '?' + Math.random());
+
+	var nip = 0;
+	jQuery('#nipplegif').on("click", function() {
+		if (nip == 1) {
+			jQuery('#nipplegif').attr('src', 'img/nipple.gif' + '?' + Math.random());
+			jQuery('#respirationPicid').show();
+			nip = 0;
+		} else if (respirationInputId.value > 0 && pulseInputId.value > 0) {
+			jQuery('#respirationPicid').hide();
+			sound0.stop();
+			sound1.stop();
+			sound2.stop();
+			jQuery('#nipplegif').attr('src', 'img/nipple_up.gif');
+			nip = 1;
+		};
+	});
+
+	jQuery('input[type="range"]').on("change", function() {
+		console.log(this.id);
+		console.log('nip = '+nip);
+		if (nip == 1) { 
+			jQuery('#nipplegif').attr('src', 'img/nipple.gif' + '?' + Math.random());
+			jQuery('#respirationPicid').show();
+			nip = 0;
+			};
+
+		if (isIE == false) {
+		switch (this.value) {
+			case '0':
+			jQuery(this).removeClass().addClass('red');
+			console.log('reded');
+			break;
+			case '1':
+			jQuery(this).removeClass().addClass('orange');
+			console.log('oranged');
+			break;
+			case '2':
+			jQuery(this).removeClass().addClass('green');
+			console.log('greened');
+			break;
+		};
+		} else {console.log('Skipped class assign unsupported attributes for Trident engine')};
+		console.log('text = '+this.id.slice(0,-7));
+		var refLink = this.id.slice(0,-7)+'Array';
+		var textId = this.id.slice(0,-7)+'Pid';
+		var picId = this.id.slice(0,-7)+'Picid';
+		console.log(textAPGAR[refLink][this.value]);
+
+		jQuery('#'+textId).html(textAPGAR[refLink][this.value]);
+		jQuery('#'+picId).attr('src', picAPGAR[refLink][this.value]);
+		if (picId == 'respirationPicid') { 
+			switch (this.value) {
+				case '0':
+				sound0.stop();
+				sound1.stop();
+				sound2.stop();
+				sound0.play();
+				break;
+				case '1':
+				sound0.stop();
+				sound1.stop();
+				sound2.stop();
+				sound1.play();
+				break;
+				case '2':
+				sound0.stop();
+				sound1.stop();
+				sound2.stop();
+				sound2.play();
+				break;
+			}
+		};
+
+		var apgarscore = (+appearanceInputId.value)+(+pulseInputId.value)+(+grimaceInputId.value)+(+activityInputId.value)+(+respirationInputId.value);
+		console.log('APGAR = '+apgarscore);
+		jQuery('#apgarscoretext').html(apgarscore);
+		if (apgarscore <= 3) { jQuery('.verdict').html('РЕБЕНКУ НУЖНА<br>РЕАНИМАЦИЯ');
+			} else if (apgarscore > 3 && apgarscore < 7) { jQuery('.verdict').html('МОЖЕТ ПОНАДОБИТЬСЯ РЕАНИМАЦИЯ');
+			} else { jQuery('.verdict').html('МАЛЫШ ТРЕБУЕТ СТАНДАРТНОГО УХОДА');
+		};
+		console.log('---');
+	});
+</script>
+
+</body>
+</html>
