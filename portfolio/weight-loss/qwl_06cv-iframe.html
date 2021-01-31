@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Quick Weight Loss</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="js/howler.min.js"></script>
+	<style>
+	/*CSS Reset*/
+p, div, img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	line-height: 1;
+}
+h1 {
+	display: block;
+	text-align: center;
+	margin-bottom: 50px;
+}
+img {
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+img.interactive {
+	width: 52px;
+}
+div.wrapcenter {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	/*border: 1px solid red;*/
+}
+div.maindiv {
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	width: 600px;
+	height: 600px;
+	font-weight: bold;
+	font-size: .9em;
+	font-family: Ubuntu, sans-serif;
+	/*border: 1px solid black;*/
+}
+div.backdiv {
+	position: absolute;
+	width: 600px;
+	height: 400px;
+	background: url(img/backlow.png) no-repeat;
+	/*border: 1px solid yellow;*/
+}
+div.choose {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	height: 50px;
+	top: 370px;
+	left: 0px;
+	text-align: center;
+	color: #ed1b24;
+	font-family: Montserrat, sans-serif;
+	font-size: 1.5em;
+	/*border: 1px solid black;*/
+}
+div.arrowbox {
+	position: absolute;
+	width: 153px;
+	height: 50px;
+	top: 317px;
+	left: 222px;
+	/*border: 1px solid black;*/
+}
+div.arrow {
+	position: relative;
+	width: 6px;
+	top: 0px;
+	left: 0%;
+	/*border: 1px solid black;*/
+}
+div.arrowpercent {
+	position: absolute;
+	width: 80px;
+	top: -40px;
+	left: -20%;
+	text-align: center;
+	font-size: 2em;
+	font-family: Montserrat, sans-serif;
+	font-weight: bold;
+	/*border: 1px solid black;*/
+}
+div.habits {
+	position: relative;
+	width: 100%;
+	height: 100px;
+	top: 400px;
+	/*border: 1px solid blue;*/
+}
+div.habits_secondlayer {
+	position: relative;
+	width: 100%;
+	height: 52px;
+	top: 335px;
+	background-color: white;
+	/*border: 1px solid orange;*/
+}
+div[class*="_habit"] {
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	width: 19%;
+	height: 200px;
+	/*border: 1px solid black;*/
+}
+div[class*="_slider"] {
+	position: relative;
+	top: 20px;
+	/*border: 1px solid green;*/
+}
+.checkedOption {
+
+}
+div[class*="_button"] {
+	position: relative;
+	top: -1px;
+	margin-left: 25px;
+	margin-right: 25px;
+	cursor: pointer;
+	/*border: 1px solid yellow;*/
+}
+div.habits_description {
+	position: relative;
+	width: 100%;
+	height: 200px;
+	top: 350px;
+	/*border: 1px solid navy;*/
+}
+div[class*="_text"] {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	top: 0px;
+	left: 10%;
+	width: 80%;
+	height: 100px;
+	font-size: 1em;
+	/*border: 1px solid green;*/
+}
+#preload-01 { background: url(img/fruits_enabled.png) no-repeat -9999px -9999px; }
+#preload-02 { background: url(img/water_enabled.png) no-repeat -9999px -9999px; }
+#preload-03 { background: url(img/workout_enabled.png) no-repeat -9999px -9999px; }
+#preload-04 { background: url(img/timing_enabled.png) no-repeat -9999px -9999px; }
+#preload-05 { background: url(img/nutrition_enabled.png) no-repeat -9999px -9999px; }
+
+@media all and (max-width: 600px) {
+
+div.maindiv {
+	width: 300px;
+	height: 600px;
+	/*border: 1px solid black;*/
+}
+div.backdiv {
+	width: 300px;
+	height: 400px;
+	background: url(img/backhi.png) no-repeat;
+	/*border: 1px solid yellow;*/
+}
+div.choose {
+	font-size: 1.2em;
+	/*border: 1px solid black;*/
+}
+div.arrowbox {
+	top: 296px;
+	left: 71px;
+	/*border: 1px solid black;*/
+}
+div[class*="_button"] {
+	margin-left: 0px;
+	margin-right: 0px;
+	/*border: 1px solid yellow;*/
+}
+div[class*="_text"] {
+	left: 0%;
+	width: 100%;
+	font-size: .6em;
+	/*border: 1px solid green;*/
+}
+}	
+	</style>
+</head>
+<body>
+<noscript>Sorry! But JavaScript is obviously disabled, forbidden and prohibited in your browser ;)</noscript>
+
+<div class="wrapcenter">
+<div class="maindiv">
+	<div class="backdiv">
+	
+	<div class="choose">ВЫБЕРИТЕ ВАШИ ПРИВЫЧКИ:</div>
+	</div>
+	<div class="arrowbox">
+		<div class="arrow"><img src="img/arrow.png"></div>
+		<div class="arrowpercent">0%</div>
+	</div>
+		<div class="habits">
+			<div class="fruits_habit">
+	<div class="fruits_slider"><img class="interactive" src="img/fruits_slider.png"></div>
+			</div>
+		
+			<div class="water_habit">
+	<div class="water_slider"><img class="interactive" src="img/water_slider.png"></div>
+			</div>
+		
+			<div class="workout_habit">
+	<div class="workout_slider"><img class="interactive" src="img/workout_slider.png"></div>
+			</div>
+		
+			<div class="timing_habit">
+	<div class="timing_slider"><img class="interactive" src="img/timing_slider.png"></div>
+			</div>
+		
+			<div class="nutrition_habit">
+	<div class="nutrition_slider"><img class="interactive" src="img/nutrition_slider.png"></div>
+			</div>
+		</div>
+
+			<div class="habits_secondlayer">
+		<div class="fruits_habit"><div class="fruits_button" data-eff="12"><img class="interactive" src="img/fruits_disabled.png"></div></div>
+		<div class="water_habit"><div class="water_button" data-eff="15"><img class="interactive" src="img/water_disabled.png"></div></div>
+		<div class="workout_habit"><div class="workout_button" data-eff="15"><img class="interactive" src="img/workout_disabled.png"></div></div>
+		<div class="timing_habit"><div class="timing_button" data-eff="28"><img class="interactive" src="img/timing_disabled.png"></div></div>
+		<div class="nutrition_habit"><div class="nutrition_button" data-eff="30"><img class="interactive" src="img/nutrition_disabled.png"></div></div>
+			</div>
+			<div class="habits_description">
+		<div class="fruits_habit"><div class="fruits_text">Свежие сезонные фрукты и овощи</div></div>
+		<div class="water_habit"><div class="water_text">Вода:<br>30 мл на<br>1 кг веса человека</div></div>
+		<div class="workout_habit"><div class="workout_text">Физнагрузки по 20-30 минут</div></div>
+		<div class="timing_habit"><div class="timing_text">Завтрак максимум через час после сна</div></div>
+		<div class="nutrition_habit"><div class="nutrition_text">Питание<br>5-6 раз по 200-300 г<br>или мл</div></div>
+			</div>
+</div>
+</div>
+
+<script>
+jQuery(document).ready(function() {
+	var ewl = 0;
+	var buttonUpSound = new Howl({
+		src: ['snd/mec_up.ogg', 'snd/mec_up.mp3']
+	});
+	var buttonDownSound = new Howl({
+		src: ['snd/mec_down.ogg', 'snd/mec_down.mp3']
+	});
+	var ewl_100 = new Howl({
+		src: ['snd/tadam.ogg', 'snd/tadam.mp3']
+	});
+	var ewl_0 = new Howl({
+		src: ['snd/omnomnom.ogg', 'snd/omnomnom.mp3']
+	});
+
+
+jQuery("[class$=_button]").on("click", function() {
+	
+	var pressedButtonClass = jQuery(this).attr("class");
+	console.log('pressedButtonClass = '+pressedButtonClass);
+
+	var getSliderName = pressedButtonClass.slice(0,-7);
+	console.log('getSliderName = '+getSliderName);
+
+	var getSliderClass = getSliderName+'_slider';
+	console.log('getSliderClass = '+getSliderClass);
+
+	if (jQuery('.'+getSliderClass).hasClass('checkedOption')) {
+		buttonDownSound.play();
+		jQuery('.'+getSliderClass).animate({top: '20px'}, 500).removeClass('checkedOption');
+		jQuery('.'+getSliderName+'_button').html('<img  class="interactive" src="img/'+getSliderName+'_disabled.png">');
+		ewl = ewl - jQuery(this).data('eff');
+	} else { buttonUpSound.play();
+		jQuery('.'+getSliderClass).animate({top: '0px'}, 500).addClass('checkedOption');
+		jQuery('.'+getSliderName+'_button').html('<img class="interactive" src="img/'+getSliderName+'_enabled.png">');
+		ewl = ewl + jQuery(this).data('eff');
+	}
+	console.log('ewl = '+ewl);
+
+	if ( ewl == 100) { ewl_100.play();
+	} else if ( ewl == 0) { ewl_0.play();
+	} 
+	
+	jQuery('.arrow').animate({left: ewl+'%'}, 500);
+	jQuery('.arrowpercent').animate({
+		left: ewl-20+'%'
+		}, {
+		duration: 500,
+		step: function (now) {
+			jQuery(this).text(Math.ceil(now)+20+'%');
+		}
+		});
+});
+})
+</script>
+
+<!-- <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script> -->
+
+</body>
+</html>
